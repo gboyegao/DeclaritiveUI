@@ -14,7 +14,20 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
-
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let navigationManager = NavigationManager()
+        
+        navigationManager.fetch(completionHandler: {
+            initialScreen in
+                let vc = TableScreen(screen: initialScreen)
+                vc.navigationManager = navigationManager
+            navigationController?.viewControllers = [vc]
+        })
+    }
+    
 
 }
 
